@@ -164,9 +164,9 @@ class Dataset(torch.utils.data.Dataset):
             j = (imgh - side) // 2
             i = (imgw - side) // 2
             img = img[j:j + side, i:i + side, ...]
-
-        img = imageio.imresize(img, [height, width])
-
+        img = Image.fromarray(img)
+        img = img.imresize(img, [height, width])
+        img = np.array(img)
         return img
 
     def load_flist(self, flist):
