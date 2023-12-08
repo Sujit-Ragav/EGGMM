@@ -142,7 +142,7 @@ class Dataset(torch.utils.data.Dataset):
             mask = (mask > 0).astype(np.uint8) * 255       # threshold due to interpolation
 
             # Convert mask to grayscale
-            mask = rgb2gray(mask)
+            #mask = rgb2gray(mask)
             mask = (mask * 255).astype(np.uint8)
             return mask
 
@@ -150,7 +150,7 @@ class Dataset(torch.utils.data.Dataset):
         if mask_type == 6:
             mask = imread(self.mask_data[index])
             mask = self.resize(mask, imgh, imgw, centerCrop=False)
-            mask = rgb2gray(mask)
+            #mask = rgb2gray(mask)
             mask = (mask > 0).astype(np.uint8) * 255
             return mask
 
