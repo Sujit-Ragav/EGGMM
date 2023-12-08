@@ -11,7 +11,6 @@ from .metrics import PSNR, EdgeAccuracy
 class EdgeConnect():
     def __init__(self, config):
         self.config = config
-
         if config.MODEL == 1:
             model_name = 'edge'
         elif config.MODEL == 2:
@@ -313,6 +312,7 @@ class EdgeConnect():
 
             # edge model
             if model == 1:
+                imsave(edges, "/content/edge-connect/incomplete.png")
                 outputs = self.edge_model(images_gray, edges, masks)
                 outputs_merged = (outputs * masks) + (edges * (1 - masks))
 
