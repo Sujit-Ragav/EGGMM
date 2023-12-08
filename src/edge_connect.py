@@ -337,9 +337,10 @@ class EdgeConnect():
                 edges = self.postprocess(1 - edges)[0]
                 masked = self.postprocess(images * (1 - masks) + masks)[0]
                 fname, fext = name.split('.')
-
-                imsave(edges, os.path.join(self.results_path, fname + '_edge.' + fext))
-                imsave(masked, os.path.join(self.results_path, fname + '_masked.' + fext))
+                edges_path = "/content/edge-connect/output/edges"
+                inpainted_edges_path = "/content/edge-connect/output/inpainted edges"
+                imsave(edges, os.path.join(edges_path, fname + '_edge.' + fext))
+                imsave(masked, os.path.join(inpainted_edges_path, fname + '_masked.' + fext))
 
         print('\nEnd test....')
 
