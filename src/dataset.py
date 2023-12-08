@@ -165,7 +165,7 @@ class Dataset(torch.utils.data.Dataset):
             i = (imgw - side) // 2
             img = img[j:j + side, i:i + side, ...]
 
-        img = scipy.misc.imresize(img, [height, width])
+        img = imageio.imresize(img, [height, width])
 
         return img
 
