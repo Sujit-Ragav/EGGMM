@@ -165,7 +165,7 @@ class Dataset(torch.utils.data.Dataset):
             i = (imgw - side) // 2
             img = img[j:j + side, i:i + side, ...]
         img = Image.fromarray(img)
-        img = img.resize(img, [height, width])
+        img = img.resize((width, height), Image.BICUBIC)
         img = np.array(img)
         return img
 
