@@ -311,6 +311,8 @@ class EdgeConnect():
             index += 1
             fname, fext = name.split('.')
             # edge model
+            model = 3
+            edges_copy = edges
             if model == 1:
                 outputs = self.edge_model(images_gray, edges, masks)
                 outputs_merged = (outputs * masks) + (edges * (1 - masks))
@@ -322,8 +324,7 @@ class EdgeConnect():
 
             # inpaint with edge model / joint model
             else:
-                edges = self.edge_model(images_gray, edges, masks).detach()
-                incomplete_edges = edges
+                edges = self.edge_model(images_gray, edges, masks)
                 outputs = self.inpaint_model(images, edges, masks)
                 outputs_merged = (outputs * masks) + (images * (1 - masks))
 
@@ -334,12 +335,14 @@ class EdgeConnect():
             imsave(output, path)
 
             if self.debug:
+                edges_copy = self.postprocess(1 - edges_copy)[0]
                 edges = self.postprocess(1 - edges)[0]
                 masked = self.postprocess(images * (1 - masks) + masks)[0]
                 fname, fext = name.split('.')
-                imsave(edges,os.path.join("/content/edge-connect/output/inpainted edges", fname + '_inpainted_edge.' + fext))
-                imsave(incomplete_edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
-                # imsave(edges, os.path.join(self.results_path, fname + '_edge.' + fext))
+                # imsave(edges,os.path.join("/content/edge-connect/output/inpainted edges", fname + '_inpainted_edge.' + fext))
+                # imsave(incomplete_edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
+                imsave(edges_copy, os.path.join("/content/edge-connect/output/edges", fname + '_incomplete_edge.' + fext))
+                imsave(edges, os.path.join("/content/edge-connect/output/inpainted edges", fname + '_inpainted_edge.' + fext))
                 # imsave(masked, os.path.join(self.results_path, fname + '_masked.' + fext))
 
         print('\nEnd test....')
