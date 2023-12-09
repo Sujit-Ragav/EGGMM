@@ -309,8 +309,7 @@ class EdgeConnect():
             name = self.test_dataset.load_name(index)
             images, images_gray, edges, masks = self.cuda(*items)
             index += 1
-            fname, fext = name.split('.')
-            imsave(edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
+
             # edge model
             if model == 1:
                 outputs = self.edge_model(images_gray, edges, masks)
@@ -324,6 +323,8 @@ class EdgeConnect():
             # inpaint with edge model / joint model
             else:
                 edges = self.edge_model(images_gray, edges, masks).detach()
+                fname, fext = name.split('.')
+                imsave(edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
                 outputs = self.inpaint_model(images, edges, masks)
                 outputs_merged = (outputs * masks) + (images * (1 - masks))
 
