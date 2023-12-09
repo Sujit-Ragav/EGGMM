@@ -83,6 +83,7 @@ def load_config(mode=None):
         parser.add_argument('--mask', type=str, help='path to the masks directory or a mask file')
         parser.add_argument('--edge', type=str, help='path to the edges directory or an edge file')
         parser.add_argument('--output', type=str, help='path to the output directory')
+        
 
     args = parser.parse_args()
     config_path = os.path.join(args.path, 'config.yml')

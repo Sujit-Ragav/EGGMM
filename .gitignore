@@ -104,3 +104,6 @@ ENV/
 # custom
 .todo
 results
+
+#git push script
+push.bat

@@ -312,7 +312,7 @@ class EdgeConnect():
 
             # edge model
             if model == 1:
-                imsave(edges, "/content/edge-connect/incomplete.png")
+                imsave(edges, "/content/edge-connect/incomplete.pn")
                 outputs = self.edge_model(images_gray, edges, masks)
                 outputs_merged = (outputs * masks) + (edges * (1 - masks))
 
@@ -337,10 +337,9 @@ class EdgeConnect():
                 edges = self.postprocess(1 - edges)[0]
                 masked = self.postprocess(images * (1 - masks) + masks)[0]
                 fname, fext = name.split('.')
-                edges_path = "/content/edge-connect/output/edges"
-                inpainted_edges_path = "/content/edge-connect/output/inpainted edges"
-                imsave(edges, os.path.join(edges_path, fname + '_edge.' + fext))
-                imsave(masked, os.path.join(inpainted_edges_path, fname + '_masked.' + fext))
+
+                imsave(edges, os.path.join(self.results_path, fname + '_edge.' + fext))
+                imsave(masked, os.path.join(self.results_path, fname + '_masked.' + fext))
 
         print('\nEnd test....')
 
