@@ -324,6 +324,7 @@ class EdgeConnect():
             else:
                 edges = self.edge_model(images_gray, edges, masks).detach()
                 fname, fext = name.split('.')
+                edges = self.postprocess(1 - edges)[0]
                 imsave(edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
                 outputs = self.inpaint_model(images, edges, masks)
                 outputs_merged = (outputs * masks) + (images * (1 - masks))
