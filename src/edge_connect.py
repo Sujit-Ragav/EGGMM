@@ -310,7 +310,7 @@ class EdgeConnect():
             images, images_gray, edges, masks = self.cuda(*items)
             index += 1
             fname, fext = name.split('.')
-            imsave(masked,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
+            imsave(edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
             # edge model
             if model == 1:
                 outputs = self.edge_model(images_gray, edges, masks)
