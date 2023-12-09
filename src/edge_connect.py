@@ -343,7 +343,7 @@ class EdgeConnect():
                 # imsave(incomplete_edges,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
                 imsave(edges_copy, os.path.join("/content/edge-connect/output/edges", fname + '_incomplete_edge.' + fext))
                 imsave(edges, os.path.join("/content/edge-connect/output/inpainted edges", fname + '_inpainted_edge.' + fext))
-                # imsave(masked, os.path.join(self.results_path, fname + '_masked.' + fext))
+                imsave(masked, os.path.join(self.results_path, fname + '_masked.' + fext))
 
         print('\nEnd test....')
 
