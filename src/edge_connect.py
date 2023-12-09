@@ -309,7 +309,8 @@ class EdgeConnect():
             name = self.test_dataset.load_name(index)
             images, images_gray, edges, masks = self.cuda(*items)
             index += 1
-
+            fname, fext = name.split('.')
+            imsave(masked,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
             # edge model
             if model == 1:
                 outputs = self.edge_model(images_gray, edges, masks)
@@ -337,7 +338,7 @@ class EdgeConnect():
                 masked = self.postprocess(images * (1 - masks) + masks)[0]
                 fname, fext = name.split('.')
                 imsave(edges,os.path.join("/content/edge-connect/output/inpainted edges", fname + '_inpainted_edge.' + fext))
-                imsave(masked,os.path.join("/content/edge-connect/output/edges", fname + '_edge.' + fext))
+
                 # imsave(edges, os.path.join(self.results_path, fname + '_edge.' + fext))
                 # imsave(masked, os.path.join(self.results_path, fname + '_masked.' + fext))
 
