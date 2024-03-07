@@ -99,7 +99,7 @@ class Dataset(torch.utils.data.Dataset):
             if sigma == 0:
                 sigma = random.randint(1, 4)
 
-            return canny(img, sigma=sigma, mask=mask).astype(np.float)
+            return canny(img, sigma=sigma, mask=mask).astype(float)
 
         # external
         else:
